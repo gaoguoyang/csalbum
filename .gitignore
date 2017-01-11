@@ -1,0 +1,9 @@
+views/.DS_Store
+*.log
+/log/*
+.DS_Store
+.idea/
+/logs/*
+*.swp
+*.swo
+*.swn

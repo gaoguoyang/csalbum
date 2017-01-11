@@ -1,0 +1,88 @@
+<%include common/head.html%>
+
+<!--main content start-->
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-3" style="float:left;">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb" style="width:98%;margin:0 auto 10px">
+                    <li><a href="#">新闻列表</a></li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+			<div style="float:left;width:200px;">
+                <input type="hidden" id="cid" value="<%=cid%>" />
+				<select id="xhs_select_news" class="form-control" style="">
+					<option cid="470" ctype="4001">要闻</option>
+					<option cid="461" ctype="4002">体育</option>
+					<option cid="462" ctype="4002">国际</option>
+					<option cid="463" ctype="4002">财经</option>
+					<option cid="464" ctype="4002">军事</option>
+					<option cid="477" ctype="4002">汽车</option>
+					<option cid="479" ctype="4002">图片</option>
+					<option cid="480" ctype="4002">视频</option>
+					<option cid="235" ctype="4003">评论</option>
+					<option cid="3172" ctype="4003">社会</option>
+					<option cid="3173" ctype="4003">科技</option>
+					<option cid="3174" ctype="4003">动新闻</option>
+				</select>
+			</div>
+        </div>
+
+        <!--列表页面-->
+        <div class="col-lg-12">
+            <div class="adv-table">
+                <table class="table table-striped table-advance table-hover" id="index_news">
+                    <thead>
+                        <tr>
+							<th style="white-space:nowrap;">序号</th>
+                            <th>文章id</th>
+                            <th class="hidden-phone"></i> 标题</th>
+                            <th><i class="icon-bookmark"></i> 时间</th>
+                            <th><i class=" icon-edit"></i> 总评论数</th>
+                            <th><i class=" icon-edit"></i> 本地评论数</th>
+                            <th><i class=" icon-edit"></i> 匹配总评数</th>
+                            <th><i class=" icon-edit"></i> 自动评论数</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="xhs_news_tbody">
+						<%include ./index_article_list.html%>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--
+            <div class="text-center">
+            <ul class="pagination">
+            <li><a href="#">«</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">»</a></li>
+            </ul>
+            </div>
+        -->
+
+
+    <div id="buttom"></div>
+    <%include ./common/upDownBtn.html%>
+    </section>
+
+</section>
+<!--main content end-->
+
+<script>
+	seajs.use('page/index' , function(obj){
+		obj();	
+	});
+    var cid = $('#cid').val();
+    $("#xhs_select_news").find("option[cid='"+cid+"']").attr("selected",true);
+    $("#index_news_length").removeClass('dataTables_length');
+    $("#index_news_length").css('color', 'red');
+</script>
+
+<%include common/foot.html%>

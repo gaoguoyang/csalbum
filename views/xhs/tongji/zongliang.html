@@ -1,0 +1,76 @@
+<%include ../common/head.html%>
+      <section id="main-content">
+          <section class="wrapper">
+              <!-- page start-->
+              <div class="row">
+                  <div class="col-sm-6">
+                      <section class="panel">
+                          <header class="panel-heading">
+                             最近一月本地总评论数
+                          </header>
+                          <table class="table">
+                              <thead>
+                              <tr>
+                                  <th>时间</th>
+                                  <th>评论数</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+								  <% allDayComments.result.forEach(function(comments){ %>
+								  <tr>
+									  <td><%=comments.cal%></td>
+									  <td><%=comments.sum%></td>
+								  </tr>
+								  <% });%>
+                              </tbody>
+                          </table>
+                      </section>
+                  </div>
+				  <div class="col-sm-6">
+                      <section class="panel">
+                          <header class="panel-heading">
+                             今天本地总评论数
+                          </header>
+                          <table class="table">
+                              <thead>
+                              <tr>
+                                  <th>时间</th>
+                                  <th>评论数</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+								  <tr>
+									  <td><%=todayComments.result.cal%></td>
+									  <td><%=todayComments.result.sum%></td>
+								  </tr>
+                              </tbody>
+                          </table>
+                      </section>
+                  </div>
+				  <div class="col-sm-6">
+                      <section class="panel">
+                          <header class="panel-heading">
+                             今天新华社总评论数
+                          </header>
+                          <table class="table">
+                              <thead>
+                              <tr>
+                                  <th>时间</th>
+                                  <th>评论数</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+								  <tr>
+									  <td><%=todayXHSComments.result.cal%></td>
+									  <td><%=todayXHSComments.result.sum%></td>
+								  </tr>
+                              </tbody>
+                          </table>
+                      </section>
+                  </div>
+			  </div>
+              <!-- page end-->
+          </section>
+      </section>
+      <!--main content end-->
+<%include ../common/foot.html%>

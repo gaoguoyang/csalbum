@@ -1,0 +1,25 @@
+<% 
+var page = {};
+page.limit			= nickName.pageInfo.limit;
+page.page			= nickName.pageInfo.page;
+page.totalCount		= nickName.pageInfo.totalCount;
+page.pageNum		= Math.ceil(page.totalCount/page.limit);
+
+console.log(page)
+%>
+
+<div>
+	<ul id="page" class="pagination pagination-lg">
+		<li><a href="/user/getNickName?flag=<%= flag %>&page=1">首页</a></li>
+		<li><a href="/user/getNickName?flag=<%= flag %>&page=<%=page.page%>">上一页</a></li>
+		<%for(var i=nickName.pageInfo.page,num=1;i<=page.pageNum;i++,num++ ){%>
+			<li><a href="/user/getNickName?flag=<%= flag %>&page=<%=i%>"><%=i%></a></li>
+			<%if(num>10){
+				break;
+			}
+		}%>
+		<li><a href="/user/getNickName?flag=<%=flag%>&page=<%=nickName.pageInfo.nextPage%>">下一页</a></li>
+		<li><a href="/user/getNickName?flag=<%=flag%>&page=<%=nickName.pageInfo.totalPages%>">最后一页</a></li>
+		<li><a href="#">共:<%=nickName.pageInfo.totalPages%>页</a></li>
+	</ul>
+</div>

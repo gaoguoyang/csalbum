@@ -1,0 +1,71 @@
+
+<!--sidebar start-->
+<aside>
+    <div id="sidebar"  class="nav-collapse ">
+        <!-- sidebar menu start-->
+        <ul class="sidebar-menu" id="nav-accordion">
+            <li>
+                <a class="" href="/index">
+                    <i class="icon-dashboard"></i>
+                    <span>发布管理</span>
+                </a>
+            </li>
+            <li>
+                <a class="" href="/auto_send">
+                    <i class="icon-dashboard"></i>
+                    <span>自动发布评论</span>
+                </a>
+            </li>
+			<li class="sub-menu">
+                <a href="javascript:;" >
+                    <i class="icon-laptop"></i>
+                    <span>昵称筛选</span>
+                </a>
+                <ul class="sub">
+                    <li><a  href="/user/getNickName?flag=0">未筛选的昵称</a></li>
+                    <li><a  href="/user/getNickName?flag=1">通过的昵称</a></li>
+                    <li><a  href="/user/getNickName?flag=2">未通过的昵称</a></li>
+                    <!--<li><a  href="/video/selfVideoList">添加分类</a></li>-->
+                </ul>
+            </li>
+            <li class="sub-menu">
+                <a href="javascript:;" >
+                    <i class="icon-laptop"></i>
+                    <span>通用评论管理</span>
+                </a>
+                <ul class="sub">
+                    <li><a  href="/common_comment/common_comment_list">添加通用评论</a></li>
+                    <!--<li><a  href="/video/selfVideoList">添加分类</a></li>-->
+                </ul>
+            </li>
+
+            <li class="sub-menu">
+				<a href="javascript:;" class="">
+                    <i class="icon-book"></i>
+                    <span>统计</span>
+                </a>
+                <ul class="sub">
+                    <li><a  href="/article/article_list">每天发送的文章</a></li>
+                    <li><a  href="/article/jixiao">已发布的评论</a></li>
+                    <li><a  href="/tongji/zongliang">总量</a></li>
+                    <li><a  href="/tongji/persent">占比统计</a></li>
+                </ul>
+            </li>
+
+            <li class="sub-menu">
+                <a href="javascript:;" >
+                    <i class="icon-user"></i>
+                    <span>管理员管理</span>
+                </a>
+                <ul class="sub">
+                    <li><a  href="/user/userList">用户管理</a></li>
+                </ul>
+            </li>
+
+        </ul>
+        <!-- sidebar menu end-->
+
+
+    </div>
+</aside>
+<!--sidebar end-->

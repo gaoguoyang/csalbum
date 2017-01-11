@@ -1,0 +1,23 @@
+<% if(result.length){ %>
+<% result.forEach(function(list){%>
+<tr>
+	<td><a href="#"><%= list.id %></a></td>
+	<td class="hidden-phone"><%= list.title %></td>
+	<td><%= list.channel %></td>
+	<td><%= list.publishDate %></td>
+	<td><%= list.comment %></td>
+    <td><%= list.shincNum %></td>
+    <td><%= list.cmtNum %></td>
+	<td><%= list.autoNum %></td>	
+	<td>
+		<!-- <a href="/comment/release_comment_list?id=<%= list.id %>&title=<%= list.title %>" class="btn btn-primary">发评论</a> -->
+		<a href="/comment/release_comment_list?id=<%= list.id %>&title=<%= list.title %>" class="btn btn-primary">批量评论</a>
+		<a href="/comment/release_one_comment_list?id=<%= list.id %>&title=<%= list.title %>" class="btn btn-primary">单条评论</a>
+        <% if(list.newsNum != 0) { %>
+	        <a href="/comment/look_comment_list?id=<%= list.id %>&title=<%= list.title %>" class="btn btn-primary">新闻匹配(<%= list.newsNum %>)</a>
+	        <% } else { %>
+	        <a href="/comment/look_comment_list?id=<%= list.id %>&title=<%= list.title %>" class="btn btn-warning disabled">新闻匹配(<%= list.newsNum %>)</a>
+        <% }%>
+	</td>
+</tr>
+<% });} %>

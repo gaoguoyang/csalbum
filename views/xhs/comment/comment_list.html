@@ -1,0 +1,9 @@
+<% if(result.length){ var num=1;%>
+<% result.forEach(function(comment){%>
+<tr>
+	<td><input class="checkbox" type="checkbox" name="comment" value="<%= num %>"/></td>
+	<td id="id_<%= num %>"><%= num %></td>
+	<td id="content_<%= num%>" class="hidden-phone"><%= comment.comment %></td>
+	<td id="nickname_<%= num%>"><%= comment.nick %></td>
+</tr>
+<% num++;});} %>

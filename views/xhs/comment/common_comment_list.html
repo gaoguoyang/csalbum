@@ -1,0 +1,128 @@
+<%include ../common/head.html%>
+<!--main content start-->
+<section id="main-content">
+<section class="wrapper">
+<div class="row">
+	<div class="col-lg-12">
+		<!--breadcrumbs start -->
+		<ul class="breadcrumb" style="width:98%;margin:0 auto 10px">
+			<li><a href="#">通用评论管理</a></li>
+            <li><a href="#">添加通用评论</a></li>
+		</ul>
+		<!--breadcrumbs end -->
+	</div>
+</div>
+
+<!--列表页面-->
+<div class="col-lg-12">
+	<section class="panel">
+	<div class="innertop">
+		<div class="inner" style="border-right:1px solid #ccc">
+			<div class="innerbox" style="width:100%;height:50px;margin-top:10px;">
+				<button type="button" class="add-frist-category btn btn-shadow btn-success col-sm-3"><i class="icon-plus"></i></button>
+			</div>
+
+			<% if( result ){%>
+			<div class="panel-group m-bot20" id="accordion">
+				<% result.forEach(function(category){%>
+				<div class="panel panel-default">
+					<div style="background-color:#ccc;" class="panel-heading">
+						<a class="xhs-category-list-a accordion-toggle <%if(open!=category.id){%>collapsed<%}%>" data-toggle="collapse" data-parent="#accordion" href="#collapse_<%= category.id %>">
+							<%= category.item.name %>
+						</a>
+					</div>
+					
+					<div id="collapse_<%= category.id %>" class="panel-collapse <%if(open!=category.id){%>collapse<%}else{%>in<%}%>" style="height: 0px;">
+						<% if( category.child ){ %>
+						<% category.child.forEach(function(child){%>
+						<div style="cursor:pointer" class="panel-body category" id="<%= child.id %>" category_id="<%= category.id %>">
+							<%= child.item.name %>
+						</div>
+						<%});%>
+						
+						<% } %>
+						<div class="col-sm-3 panel-body add_child_category" category_id="<%= category.id %>" style="width:100%;cursor:pointer;" >
+							<i class="icon-plus"></i>
+						</div>
+					</div>
+				</div>
+				<%});%>
+			</div>
+			<% }%>
+		</div>
+		<div class="inner" id="one-comment" style="height:100%;margin-left:10px;">
+			<div class="one">
+				<div class="text1" >分类id：</div>
+				<div class="col-sm-10" style="width:80%">
+					<input id="input_category_id" readonly type="text" class="form-control" >
+				</div>
+				<div style="clear:both"></div>
+			</div>
+			<div class="one">
+				<div class="text1" >分类：</div>
+				<div class="col-sm-10" style="width:80%">
+					<input readonly id="category_name" type="text" class="form-control" >
+				</div>
+				<div style="clear:both"></div>
+			</div>
+			<div class="one">
+				<div class="text1" >评论内容：</div>
+				<div class="col-sm-10" style="width:80%">
+					<input id="content" type="text" class="form-control" >
+				</div>
+				<div style="clear:both"></div>
+			</div>
+			<div class="one">
+				<button type="button" class="btn btn-danger add_comment">添加通用评论</button>
+				<div style="clear:both"></div>
+			</div>
+
+			
+		</div>
+	</div>
+
+
+	</section>
+</div>
+
+</section>
+<!--main content end-->
+
+<div class="modal fade in add-category-dialog" style="display: block;display:none">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close dialog_close">×</button>
+				<h4 class="modal-title">添加分类</h4>
+			</div>
+			<div class="modal-body">
+				<div class="xhs-add-category" >
+					<div class="xhs-add-category-tag"  >父级ID:</div>
+					<div class="col-sm-10" style="width:70%">
+						<input name="parent" id="add_category_id" readonly type="text" class="form-control" >
+					</div>
+				</div>
+				<div class="xhs-add-category" >
+					<div class="xhs-add-category-tag" >分类名称:</div>
+					<div class="col-sm-10" style="width:70%">
+						<input name="name" id="add_category_name" type="text" class="form-control" >
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="dialog_close btn btn-default" type="button">取消</button>
+				<button class="btn btn-success xhs-add-category-button" type="button">添加</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal-backdrop fade in add-category-layer" style="display:none"></div>
+<script>
+	seajs.use('page/common_comment_list' , function(obj){
+		obj();
+	});	
+</script>
+
+<%include ../common/foot.html%>
+
+

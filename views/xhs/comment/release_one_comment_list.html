@@ -1,0 +1,84 @@
+<%include ../common/head.html%>
+<!--main content start-->
+<section id="main-content">
+	<section class="wrapper">
+		<div class="row">
+			<div class="col-lg-12">
+				<!--breadcrumbs start -->
+				<ul class="breadcrumb" style="width:98%;margin:0 auto 10px">
+					<li><a href="#">新闻列表</a></li>
+					<li><a href="#">评论</a></li>
+				</ul>
+				<!--breadcrumbs end -->
+			</div>
+		</div>
+
+		<!--列表页面-->
+		<div class="col-lg-12">
+			<section class="panel">
+				<header class="panel-heading" id="article_id" article_id="<%= id %>">
+					<%= title %>
+				</header>
+				<div class="innertop">
+					<div class="inner" style="height:100%">
+						<div class="one">
+							<div class="text1" >选择分类：</div>
+							<select style="height:40px;width:auto;float:left;margin-top:8px;margin-left:12px;" id="add_category" class="form-control" size="1" name="example_length" aria-controls="example">
+								<option value="0" selected="selected">请选择</option>
+								<%if(category.result.length){%>
+								<% category.result.forEach(function(cate){%>
+									<option value="<%=cate.item.id%>"><%=cate.item.name%></option>
+								<%});}%>
+							</select>	 
+							<select style="height:40px;width:auto;float:left;margin-top:8px;margin-left:10px;" id="add_categor_child" class="form-control" size="1" name="example_length" aria-controls="example">
+								<option value="0" selected="selected">请选择</option>
+								<%if(category.result.length){%>
+									<% category.result.forEach(function(cate){%>
+										<%if(cate.child){%>
+											<% cate.child.forEach(function(child){%>
+											<option value="<%=child.item.id%>" parent="<%=cate.id%>" style="display:none"><%=child.item.name%></option>
+											<%});
+										}
+									});
+								}%>
+							</select>
+						<div style="clear:both"></div>
+						</div>
+						<div class="one" style="margin-top:20px;">
+							<div class="text1" >昵称：</div>
+							<div class="col-sm-10" style="width:80%">
+								<input type="text" class="form-control" id="user_nick" >
+							</div>
+						<div style="clear:both"></div>
+						</div>
+						<div class="one" style="margin-top:20px;">
+							<div class="text1" >评论内容：</div>
+							<div class="col-sm-10" style="width:80%">
+								<input type="text" class="form-control" id="user_comment" >
+							</div>
+						<div style="clear:both"></div>
+						</div>
+						<div class="one" style="margin-top:20px;">
+							<button type="submit" class="btn btn-danger " id="submit_commit_one">发评论</button>
+						</div>
+						<div style="clear:both"></div>
+					</div>
+					<div style="clear:both"></div>
+				</div>
+
+			</section>
+		</div>
+
+	</section>
+
+</section>
+<!--main content end-->
+
+
+<script>
+seajs.use("page/release_comment_list" , function(obj){
+	obj.release_comment_list();
+});
+</script>
+
+<%include ../common/foot.html%>

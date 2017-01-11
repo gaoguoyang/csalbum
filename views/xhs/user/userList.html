@@ -1,0 +1,219 @@
+  <%include ../common/head.html%>
+
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+          <div class="row">
+              <div class="col-lg-12">
+
+             <section class="panel">
+             <header class="panel-heading">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <!--breadcrumbs start -->
+                        <ul class="breadcrumb">
+                            <li><a href="#">管理员管理</a></li>
+                            <li><a href="#">用户管理</a></li>
+                        </ul>
+                        
+                    </div>
+                </div>
+            </header>
+
+             <div class="panel-body">
+                 <button class="btn btn-info" type="button" id="addUser"><i class="icon-plus"></i>添加管理员</button>
+                 <div class="adv-table">
+                     <table  class="display table table-bordered table-striped" id="example">
+                         <thead>
+                         <tr>
+                             <th>姓名</th>
+                             <th style="width:8%">身份</th>
+                             <th>权限</th>
+                             <th>操作</th>
+                         </tr>
+                         </thead>
+                         <tbody>
+                        <% result.forEach(function(item){  %>
+                             <tr class="">
+                                 <td><%=item.nickname%></td>
+                                 <td><%=item.authGroup.remark%></td>
+                                 <td>
+                                     <% if(item.authGroup.name == 'admin') { %>
+                                        全部
+                                     <% } else {%>
+                                            <%  item.authList.forEach(function(item2){ %>
+                                                    <%if(item2.authority != 'videoManage' && item2.authority != 'knowledgeManage' && item2.authority != 'infoManage' && item2.authority != 'adminUserManage'){ %>
+                                                        <%=item2.remark%>、
+                                                    <% } %>
+                                            <%  }); %>
+                                     <% }%>
+                                 </td>
+                                 <td class="center" style="white-space:nowrap;">
+                                    <% if(item.authGroup.name == 'admin1') { %>
+                                        <button class="btn btn-info" type="button" id="updateUser" showDetail="<%=item.id%>">查看</button>&nbsp;
+                                        <button class="btn btn-info" type="button" updateUserId="<%=item.id%>" nickname="<%=item.nickname%>">修改</button>
+                                    <% } else {%>
+                                         <button class="btn btn-info" type="button" id="updateUser" showDetail="<%=item.id%>">查看</button>&nbsp;
+                                         <button class="btn btn-info" type="button" resetPassword="<%=item.id%>" nickname="<%=item.nickname%>">重置密码</button>&nbsp;
+                                         <button class="btn btn-danger" type="button" delteUserId="<%=item.id%>" >删除</button>
+                                    <% }%>
+                                 </td>
+                             </tr>  
+                        <% });%>
+                         </tbody>
+                     </table>
+                 </div>
+             </div>
+             </section></div></div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="updateModalLabel">修改讲解人信息</h4>
+                  </div>
+                  <div class="modal-body">
+                        <form class="form-horizontal" role="form" id="userForm">
+                            <div class="form-group">
+                                <label for="userName" class="col-lg-2 col-sm-2 control-label" style="width:20%">管理员名</label>
+                                <div class="col-lg-10" style="width:80%">
+                                    <input type="text" class="form-control" id="nickname" name="nickname" value="">
+                                </div>
+                            </div>
+                            <div class="form-group" id="adminAuth">
+                                <label for="userName" class="col-lg-2 col-sm-2 control-label" style="width:20%">管理员权限</label>
+                                <div class="col-lg-10" style="width:80%">
+                                  <select id="authGroupSel" name="authGroup.id" class="form-control input-sm m-bot15 col-lg-10" style="width:auto;">
+                                  </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="lectureLevel" class="col-lg-2 col-sm-2 control-label" style="width:20%">设置密码</label>
+                                <div class="col-lg-10" style="width:80%">
+                                    <input type="password" class="form-control" id="password" name="password">
+                                    <input type="hidden" class="form-control" id="company.id" name="company.id" value="1">
+                                    <input type="hidden" class="form-control" id="enabled" name="enabled" value="1">
+                                </div>
+                            </div>
+                        </form>
+                        <span id="errorResult" class="help-block"></span>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="cancel" class="cancel">取消</button>
+                    <button type="button" class="btn btn-primary" id="save">保存</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div aria-hidden="false" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="deleteConfirm" class="modal fade in">
+                  <div class="modal-dialog">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                              <h4 class="modal-title">删除确认</h4>
+                          </div>
+                          <div class="modal-body">
+                             您确认删除此记录吗？
+                          </div>
+                          <span id="delete_Result" class="help-block"></span>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal" >取消</button>
+                              <button type="button" class="btn btn-warning" id="delConfirmBtn">确认</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+            <div aria-hidden="false" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="alertSuccess" class="modal fade in">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                            <h4 class="modal-title">交易结果提醒</h4>
+                        </div>
+                        <div class="modal-body">
+                            <strong>交易已成功</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 重置密码 begin -->
+            <div class="modal fade" id="resetPwdModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="updateModalLabel">重置密码</h4>
+                  </div>
+                  <div class="modal-body">
+                        <form class="form-horizontal" role="form" id="userFormPwd">
+                            <div class="form-group">
+                                <label for="userName" class="col-lg-2 col-sm-2 control-label" style="width:20%">管理员名</label>
+                                <div class="col-lg-10" style="width:80%">
+                                    <label id="userName" class="form-control"></label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="lectureLevel" class="col-lg-2 col-sm-2 control-label" style="width:20%">新密码</label>
+                                <div class="col-lg-10" style="width:80%">
+                                    <input type="password" class="form-control" id="password" name="password">
+                                    <input type="hidden" class="form-control" id="company.id" name="company.id" value="1">
+                                    <input type="hidden" class="form-control" id="enabled" name="enabled" value="1">
+                                </div>
+                            </div>
+                        </form>
+                        <span id="resetPwd_errorResult" class="help-block"></span>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="cancel_resetpwd" class="cancel">取消</button>
+                    <button type="button" class="btn btn-primary" id="confirm">确定</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- 重置密码 end -->
+
+            <!-- 查看详情 begin -->
+            <div class="modal fade" id="showModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="updateModalLabel">查看管理员详情</h4>
+                  </div>
+                  <div class="modal-body">
+                        <form class="form-horizontal" role="form" id="userForm">
+                            <div class="form-group">
+                                <label for="userName" class="col-lg-2 col-sm-2 control-label" style="width:20%">管理员名</label>
+                                <div class="col-lg-10" style="width:80%">
+                                    <input type="text" class="form-control" id="nickname2" name="nickname" value="" readonly="readonly">
+                                </div>
+                            </div>
+                            <div class="form-group" id="adminAuth2">
+                                <label for="userName" class="col-lg-2 col-sm-2 control-label" style="width:20%">管理员权限</label>
+                                <div class="col-lg-10" style="width:80%">
+                                  <input type="text" class="form-control" id="authGroupSel2" name="authGroup.id" value="" readonly="readonly">
+                                </div>
+                            </div>
+                        </form>
+                        <span id="errorResult" class="help-block"></span>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="cancel" class="cancel">关闭</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- 查看详情 end -->
+
+         </section>
+
+    </section>
+    <!--main content end-->
+
+
+    <%include ../common/foot.html%>

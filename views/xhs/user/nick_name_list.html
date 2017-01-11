@@ -1,0 +1,125 @@
+<%include ../common/head.html%>
+
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+            <div class="row" style="width:98%;margin:0 auto;">
+                <div class="col-lg-9">
+                    <!--breadcrumbs start -->
+                    <ul class="breadcrumb" style="width:50%;margin:0 auto 10px;overflow: hidden;float:left;margin-left:-15px">
+                        <li><a href="#">昵称筛选</a></li>
+                        <li>
+                        	<a href="#">
+                        	<% if(flag == 0) { %>
+                        		未筛选
+                        	<% } else if(flag == 1) { %>
+								已通过
+                        	<% } else {%>
+								未通过
+                        	<% } %>
+                        	</a>
+                        </li>
+                        <!--<li><a href="#">讲解人管理</a></li>-->
+
+                    </ul>
+                    <!--breadcrumbs end -->
+                </div>
+            </div>
+
+            <!--列表页面-->
+            <div class="col-lg-12">
+                <section class="panel">
+                    <table class="table table-striped table-advance table-hover">
+                        <thead>
+                        <tr>
+							<td>
+									选择
+							</td>
+                            <th><i class="icon-bullhorn"></i>id</th>
+                            <th class="hidden-phone"><i class="icon-question-sign"></i> 昵称</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="article_list">
+
+                        <% if(nickName.result != null){ var num=1;%>
+                        <% nickName.result.forEach(function(list){%>
+                        <tr>
+							<td><input type="checkbox" name="nick" value="<%= num %>"></td>
+                            <td><a href="#" id="id_<%= num %>"><%= list.id %></a></td>
+                            <td class="hidden-phone" id="nickname_<%= num %>"><%= list.nickname %></td>
+							<td>
+								<% if (flag == 0){ %> 
+								<button class="btn btn-primary check" flag='1' id="<%= num%>">通过</button>
+								<button class="btn btn-danger check" flag='2' id="<%= num%>">不通过</button>  
+								<% }%>
+								<% if (flag == 1){ %> 
+								<button class="btn btn-danger check" flag='2' id="<%= num%>">不通过</button>  
+								<% }%>
+
+								<% if (flag == 2){ %> 
+								<button class="btn btn-primary check" flag='1' id="<%= num%>">通过</button>
+								<% }%>
+							</td>
+                        </tr>
+                        <% num++;});} %>
+
+                        </tbody>
+                    </table>
+					<div id="page"></div>
+					<div style="clear:both"></div>
+					<label class="label_radio r_off label_all" for="all_checkbox">
+						<input style="float:left" id="all_checkbox" type="radio" name="checkbox"> 全选
+					</label>
+					<label class="label_radio r_off label_all" for="all_not_checkbox">
+					<input style="float:left" id="all_not_checkbox" type="radio" name="checkbox"> 全不选
+				</label>
+					<% if (flag == 0){ %> 
+					<button class="more_check btn btn-primary" flag="1">批量通过</button>
+					<button class="more_check btn btn-danger" flag="2">批量不通过</button>
+					<% }%>
+					<% if (flag == 1){ %> 
+					<button class="more_check btn btn-danger" flag="2">批量不通过</button>
+					<% }%>
+
+					<% if (flag == 2){ %> 
+					<button class="more_check btn btn-primary" flag="1">批量通过</button>
+					<% }%>
+                </section>
+            </div>
+
+
+        </section>
+
+    </section>
+    <!--main content end-->
+<script src="/flatlib/js/bootstrap-paginator.js"></script>
+
+<script>
+	<%if(nickName.pageInfo != null){
+		//文档数量pagecount =page.totalCount	 ，分页大小pagesize = page.limit ，以及当前页面currentpage =page.page
+		var page = {};
+		page.limit			= nickName.pageInfo.limit;	//显示多少条
+		page.page			= nickName.pageInfo.page;	//当前页
+		page.totalCount		= nickName.pageInfo.totalCount;		//总数
+		page.pageNum		= Math.ceil(page.totalCount/page.limit);	//总页数
+	}%>
+	// console.log(page);
+	var options = {
+		currentPage:<%=nickName.pageInfo.page%>,
+		totalPages:<%=Math.ceil(nickName.pageInfo.totalCount/nickName.pageInfo.limit)%>,	//totalPages	总页数
+		numberOfPages:8,
+		pageUrl:function(type , page , current){
+			return "/user/getNickName?flag=<%=flag%>&page="+page;
+		}
+	}
+
+	$('#page').bootstrapPaginator(options);
+
+	seajs.use(['page/nick_name_list' , 'app/page'] , function(obj , page){
+		obj();
+		page();
+	});
+
+</script>
+<%include ../common/foot.html%>

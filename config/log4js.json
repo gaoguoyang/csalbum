@@ -1,0 +1,14 @@
+{
+    "appenders": [{
+        "type": "console"
+    }, {
+    "type": "file",
+    "filename": "../logs/cook.log",
+    "pattern": "-yyyy-MM-dd",
+    "maxLogSize": 10240000,
+    "backups": 4,
+    "category": ["normal","console"]
+    }],
+    "replaceConsole": true,
+    "levels":{ "console": "DEBUG","normal":"DEBUG"}
+}

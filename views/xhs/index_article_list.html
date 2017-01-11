@@ -1,0 +1,29 @@
+				<% if(result.length){ var i=1; %>
+				<% result.forEach(function(list){%>
+				<tr id="newsItem_<%=i%>">
+					<td><%= i %></td>
+					<td><a href="#"><%= list.id %></a></td>
+					<td class="hidden-phone"><%= list.topic %></td>
+					<td><%= list.releaseDate %></td>
+					<td>
+						<% if(list.comment == '0') { %>
+							<span class="label label-danger"><%= list.comment %></span>
+						<% } else { %>
+							<%= list.comment %>
+						<% }%>
+					</td>
+					<td><%= list.commentsCount %></td>
+					<td><%= list.cmtNum %></td>
+					<td><%= list.autoNum %></td>
+					<td>
+						<a href="/comment/release_comment_list?id=<%= list.id %>&title=<%= list.topic %>" class="btn btn-primary">批量评论</a>
+						<a href="/comment/release_one_comment_list?id=<%= list.id %>&title=<%= list.topic %>" class="btn btn-primary">单条评论</a>
+						<% if(list.matchNewsCount!=0) {%>
+						<a href="/comment/look_comment_list?id=<%= list.id %>&title=<%= list.topic %>" class="btn btn-primary">新闻匹配(<%= list.matchNewsCount %>)</a>
+						<% } else {%>
+						<a href="/comment/look_comment_list?id=<%= list.id %>&title=<%= list.topic %>" class="btn btn-warning disabled">新闻匹配(<%= list.matchNewsCount %>)</a>
+						<% } %>
+						<!-- <a href="/comment/release_comment_list?id=<%= list.id %>&title=<%= list.topic %>" class="btn btn-primary">查看评论</a> -->
+					</td>
+				</tr>
+				<% i++; });} %>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="新华社评论管理系统">
+    <meta name="author" content="shinc">
+    <meta name="keyword" content="shinc edu online">
+    <link rel="shortcut icon" href="img/favicon.png">
+
+    <title>新华社评论管理系统</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap-reset.css" rel="stylesheet">
+    <!--external css-->
+    <link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/style-responsive.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/assets/jquery-multi-select/css/multi-select.css" />
+    <link rel="stylesheet" href="/css/zhishidian.css"/>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+    <!--[if lt IE 9]>
+      <script src="/js/html5shiv.js"></script>
+      <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+	<script src="/js/sea-modules/seajs/seajs/2.2.0/sea.js"></script>
+
+	<script>
+		seajs.config({
+
+			base:"/js/",
+			alias:{
+				'jquery':"sea-modules/jquery/jquery/1.10.1/jquery.js"
+			}
+		});
+	</script>
+
+	<script>
+		seajs.use("app/test" , function(test){
+			test.test();
+		});
+	</script>
+
+  </head>
+
+  <body>
+  <section id="container" class="">
+		<!--header start-->
+		<header class="header white-bg">
+		<div class="sidebar-toggle-box">
+			<div data-original-title="Toggle Navigation" data-placement="right" class="icon-reorder tooltips"></div>
+		</div>
+		<!--logo start-->
+		<a href="index.html" class="logo" >新华社评论管理系统</a>
+		<!--logo end-->
+		<div class="top-nav ">
+			<!--search & user info start-->
+			<ul class="nav pull-right top-menu">
+				<li>
+				<!-- <input type="text" class="form-control search" placeholder="Search"> -->
+				</li>
+				<!-- user login dropdown start-->
+				<li class="dropdown">
+				<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+					<img alt="" src="../img/avatar1_small.jpg">
+					<!--	<span class="username"><%=userInfo.userName%></span>-->
+					<b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu extended logout">
+					<div class="log-arrow-up"></div>
+					<!-- <li><a href="#"><i class=" icon-suitcase"></i>Profile</a></li>
+					<li><a href="#"><i class="icon-cog"></i> Settings</a></li>
+					<li><a href="#"><i class="icon-bell-alt"></i> Notification</a></li> -->
+					<li><a href="/logout"><i class="icon-key"></i>退出登录</a></li>
+				</ul>
+				</li>
+				<!-- user login dropdown end -->
+			</ul>
+			<!--search & user info end-->
+		</div>
+		</header>
+		<!--header end-->
+
+
+		<!--sidebar start-->
+		<aside>
+		<div id="sidebar"  class="nav-collapse ">
+			<!-- sidebar menu start-->
+			<ul class="sidebar-menu" id="nav-accordion">
+				<!-- <li>
+				<a class="active" href="/">
+					<i class="icon-dashboard"></i>
+					<span>Dashboard</span>
+				</a>
+				</li>
+
+				<li class="sub-menu">
+				<a href="javascript:;" >
+					<i class="icon-laptop"></i>
+					<span>题目类视频管理</span>
+				</a>
+				<ul class="sub">
+					<li><a  href="/video/pastpaperList">真题/模拟题库管理</a></li>
+					<li><a  href="/video/selfVideoList">自编/改编题库管理</a></li>
+					<li><a  href="/video/topicStructure">真题/模拟题库结构</a></li>
+				</ul>
+				</li>
+
+				<li class="sub-menu">
+				<a href="javascript:;" >
+					<i class="icon-book"></i>
+					<span>知识点类视频管理</span>
+				</a>
+				<ul class="sub">
+					<li><a  href="/knowledge/knowledgeVideo">知识点视频管理</a></li>
+					<li><a  href="/knowledge/knowledgeStructure">知识点结构管理</a></li>
+				</ul>
+				</li>
+
+				<li class="sub-menu">
+				<a href="javascript:;" >
+					<i class="icon-cogs"></i>
+					<span>信息管理</span>
+				</a>
+				<ul class="sub">
+					<li><a  href="/keyword/keywordTag">关键字标签管理</a></li>
+					<li><a  href="/knowledge/knowledgeList">知识点管理</a></li>
+					<li><a  href="/lecture/lectureList">讲解人管理</a></li>
+				</ul>
+				</li>
+
+				<li class="sub-menu">
+				<a href="javascript:;" >
+					<i class="icon-tasks"></i>
+					<span>教师管理</span>
+				</a>
+				<ul class="sub">
+					<li><a  href="/user/userList">教师管理</a></li>
+				</ul>
+				</li> -->
+
+			<!-- menu begin-->
+			<%	if(typeof(userInfo) != 'undefined') { %>
+
+			<%
+                var menuMap = userInfo.menuMap;
+                if(Object.prototype.toString.call(menuMap) === '[object Array]') {
+            %>
+
+            <% menuMap.forEach(function(item){  %>
+	            <li class="sub-menu">
+	                <%	if(item.url == 'none'){   %>
+							<a href="javascript:;">
+	                <%	} else {  %> 
+							<a href="<%=item.url%>">
+	                <%	}	%>
+	                		<%	if(item.tag == 'videoManage') {%>
+									<i class="icon-laptop"></i>
+	                		<%	} %>
+	                		<%	if(item.tag == 'knowledgeManage') {%>
+									<i class="icon-book"></i>
+	                		<%	} %>
+	                		<%	if(item.tag == 'infoManage') {%>
+									<i class="icon-th"></i>
+	                		<%	} %>
+	                		<%	if(item.tag == 'adminUserManage') {%>
+									<i class="icon-user"></i>
+	                		<%	} %>
+							<span><%=	item.title	%></span>
+							</a>
+					<%	if(item.sub != null){ 	%>	
+							<ul class="sub">
+							<% item.sub.forEach(function(item2){  %>
+								<li>
+									<a href="<%=item2.url%>">
+										<%=item2.title%>
+									</a>	
+								</li>	
+							<% }); %>
+							</ul>
+					<%	}	%>
+	            </li>
+            <% }); %>
+
+            <%}%>
+
+            <%	}	%>
+            <!-- menu end-->
+
+			</ul>
+			<!-- sidebar menu end-->
+			
+		
+		</div>
+		</aside>
+		<!--sidebar end-->

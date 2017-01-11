@@ -1,0 +1,84 @@
+*{
+    margin:0;
+    padding:0;
+    list-style:none;
+}
+.innertop{
+    width:100%;
+    height:auto;
+    overflow: hidden;
+    margin:20px auto;
+    /*border:1px solid red;*/
+}
+.innertop .inner{
+    width:48%;
+    height:auto;
+    float:left;
+    /*border:1px solid yellow;*/
+}
+.innertop {
+    width:100%;
+    float:left;
+    padding:7px;
+}
+.innertop .inner .two{
+    width:100%;
+    height:auto;
+    float:left;
+    /*border:3px solid blue;*/
+}
+.innertop .inner .one .next.btn{
+    float:right;
+    margin-right:60px;
+}
+.innertop .inner .one .btn{
+    float:right;
+    margin-right:110px;
+}
+
+.innertop .one .text{
+    float:left;
+    width:70px;
+    height:50px;
+    line-height:60px;
+
+}
+.innertop .inner .text1{
+    float:left;
+    width:70px;
+    height:35px;
+    line-height:35px;
+    text-align:right;
+}
+.innertop .one .radios{
+    float:left;
+}
+
+.text1{
+	float:left;
+    width:70px;
+    height:35px;
+    line-height:56px;
+    text-align:right;
+}
+.one{
+	margin-bottom:20px;
+}
+.gotop{
+    bottom:65px;
+}
+.gobottom{
+    bottom:20px;
+}
+.gotop,.gobottom{
+    width:40px;
+    height:40px;
+    line-height: 40px;
+    background:#777;
+    position:fixed;
+    right:10px;
+    color:#fff;
+    text-align:center;
+    overflow:hidden;
+    border-radius: 5px;
+}

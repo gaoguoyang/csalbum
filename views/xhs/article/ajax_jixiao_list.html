@@ -1,0 +1,27 @@
+<tr>
+	<td>总评论数: <%=result.count%></td>
+	<td>手动评论数: <%=result.handSum%></td>
+    <td>自动评论数: <%=result.autoSum%></td>
+</tr>
+<% if(result.list.length){ %>
+<% result.list.forEach(function(obj){%>
+<tr>
+	<td><a href="#"><%= obj.articleId%></a></td>
+	<td class="hidden-phone"><%= obj.userNickName%></td>
+	<td><%= obj.title%></td>
+	<td><%= obj.addDate%></td>
+	<td><%= obj.content%></td>
+	<td>
+		 <%= obj.sendFlag%>
+		<!-- <button class="btn btn-success btn-xs"><i class="icon-ok"></i></button>
+		<button class="btn btn-primary btn-xs"><i class="icon-pencil"></i></button>
+		<button class="btn btn-danger btn-xs"><i class="icon-trash "></i></button> -->
+	</td>
+</tr>
+<%})%>
+<%}%>
+
+
+
+
+

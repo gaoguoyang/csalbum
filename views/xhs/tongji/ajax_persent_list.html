@@ -1,0 +1,25 @@
+ <% if(result) {%>
+ <% result.forEach(function(obj){%>
+    <% obj.percentList.forEach(function(data,index){%>
+    <tr bgcolor="#F9F9F9">
+      <% if(index == 0) { %>
+      <td rowspan="2" width="10%"><a href="#"><%= obj.date %></a></td>
+      <% } %>
+      <% if(index == 0) { %>
+      <td rowspan="2" width="10%" ><a href="#"><%= obj.articleNum %></a></td>
+      <td rowspan="2" width="10%" ><a href="#"><%= obj.autoNum %></a></td>
+      <td rowspan="2" width="10%" ><a href="#"><%= obj.date %></a></td>
+      <% } %>
+     
+      
+      <td align="center" class="hidden-phone"><%= data.desc %></a></td>
+      <td align="center" class="hidden-phone"><%= data.xhsSum %></td>
+      <td align="center" class="hidden-phone"><%= data.shincSum %></td>
+      <td align="center" class="hidden-phone"><%= data.percent %></td>
+    </tr>
+    <%})%>
+    <tr bgcolor="#F1F2F7">
+      <td colspan="6" style="background-color: #F1F2F7; height: 5px; padding:0px; margin:0px; ">&nbsp;</td>
+    </tr>
+<%})%>                               
+<%}%>

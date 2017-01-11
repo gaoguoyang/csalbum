@@ -1,0 +1,13 @@
+<div class="panel panel-default">
+	<div style="background-color:#ccc;" class="panel-heading">
+		<a class="xhs-category-list-a accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse_<%= parent %>">
+			<%= name %>
+		</a>
+	</div>
+	
+	<div id="collapse_<%= parent %>" class="panel-collapse collapse" style="height: 0px;">
+		<div class="col-sm-3 panel-body add_child_category" category_id="<%= parent %>" style="width:100%;cursor:pointer;" >
+			<i class="icon-plus"></i>
+		</div>
+	</div>
+</div>

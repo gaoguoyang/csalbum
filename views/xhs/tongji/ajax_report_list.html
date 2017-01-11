@@ -1,0 +1,19 @@
+<% if(result) {%>
+    <tr bgcolor="#F9F9F9">
+      <td align="left" colspan="6">日期：<%= date %> &nbsp;&nbsp;&nbsp;当天总评论数：<%= result.total %></td>
+    </tr>
+    <% result.list.forEach(function(data,index){%>
+    <tr bgcolor="#F9F9F9">
+        <%if(index == '0') {%>
+            <td align="center"><i class="glyphicon glyphicon-thumbs-up"></i></td>
+        <% } else { %>
+            <td align="center">&nbsp;</td>
+        <% }%>
+        <td align="center"><a href="#"><%= index+1 %></a></td>
+        <td align="center"><a href="#"><%= data.nickname %></a></td>
+        <td align="center" class="hidden-phone"><%= data.handSum %></td>
+        <td align="center" class="hidden-phone"><%= data.autoSum %></td>
+        <td align="center" class="hidden-phone"><%= data.total %></td>
+    </tr>
+    <%})%>
+<%}%>

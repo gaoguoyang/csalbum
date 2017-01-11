@@ -1,0 +1,29 @@
+<div class="modal fade in" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: block;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h4 class="modal-title"><%= title %></h4>
+			</div>
+			<div class="modal-body">
+			
+				<% if(result ==0){%>
+					<button class="btn-danger">您已重复提交评论</button>	<br>	<br>	<br>
+					<%= content %>: <%= result %>
+
+				<%}else{%>
+					<%= content %>:&nbsp;
+					<%= result.success %>条
+					<br>
+					<%= content_fail%>:&nbsp;
+					<%= result.failed %>条
+				<%}%>
+					
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-danger close_ok" type="button"> OK </button>
+			</div>
+		</div>
+	</div>
+	<div class="modal-backdrop fade in add-category-layer close" ></div>
+</div> 

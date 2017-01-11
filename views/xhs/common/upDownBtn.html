@@ -1,0 +1,20 @@
+<!-- 上顶部 下底部 begin -->
+<div>
+    <a href="#" >
+        <div id="goTopBtn" class="fixed_top pull-right gotop" onmouseover="this.style.backgroundColor='#444'" onmouseout="this.style.backgroundColor='#777'">上</div>
+    </a>
+    <a href="#buttom">
+        <div id="goBottomBtn" class="fixed_bottom pull-right gobottom" onmouseover="this.style.backgroundColor='#444'" onmouseout="this.style.backgroundColor='#777'">下</div>
+    </a>
+<div>
+<!-- 上顶部 下底部 end -->
+
+<script type="text/javascript">
+	$('#goTopBtn').on('click', function(event) {
+		 $('html,body').animate({scrollTop:$('#main-content').offset().top},200);
+	});
+
+	$('#goBottomBtn').on('click', function(event) {
+		 $('html,body').animate({scrollTop:$('#buttom').offset().top},200);
+	});
+</script>
